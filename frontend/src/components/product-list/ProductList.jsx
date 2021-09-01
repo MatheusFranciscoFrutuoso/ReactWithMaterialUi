@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 
-
-
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
   {
@@ -24,27 +22,39 @@ const columns = [
   }
 ];
 
-const rows = [
-  { id: 1, name: 'Snow', productValue: '1', productCategory: 'Jon'},
-  { id: 2, name: 'Lannister', productValue: '1', productCategory: 'Cersei'},
-  { id: 3, name: 'Lannister', productValue: '1', productCategory: 'Jaime'},
-  { id: 4, name: 'Stark', productValue: '1', productCategory: 'Arya'},
-  { id: 5, name: 'Targaryen', productValue: '1', productCategory: 'Daenerys'},
-  { id: 6, name: 'Melisandre', productValue: '1', productCategory: null},
-  { id: 7, name: 'Clifford', productValue: '1', productCategory: 'Ferrara'},
-  { id: 8, name: 'Frances', productValue: '1', productCategory: 'Rossini'},
-  { id: 9, name: 'Roxie', productValue: '1', productCategory: 'Harvey'},
-];
-
 class ProductList extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      list: []
+    }   
+  }
+
+  componentDidMount(){
+    this.repo = this.props.listP;
+    this.setState({
+      list : this.repo.list()
+    })
+    this.repo.enroleds(this.attList.bind(this))
+  }
+
+  componentWillUnmount(){
+    this.repo.removeEnroled(this.attList.bind(this))
+  }
+
+  attList(list){ 
+    this.setState({
+      list : list
+    })
+  }
 
   render() {
     return (
       <div style={{ height: 400}}>
         <DataGrid
-          rows={rows}
+          rows={this.state.list}
           columns={columns}
-          pageSize={5}
           checkboxSelection
           disableSelectionOnClick
         />
