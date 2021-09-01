@@ -13,7 +13,6 @@ namespace DataTest.ModelsTest
         [Fact]
         public void BaseInstanceTest()
         {
-            //Arrange
             //Act
             Action a = () => Activator.CreateInstance<Base>();
             //Assert
