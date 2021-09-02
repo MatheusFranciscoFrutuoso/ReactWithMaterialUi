@@ -21,19 +21,9 @@ class CategoryRepository{
         });
     }
     create(model){
-        let index = this.listC.findIndex(c => c.id === model.id)
-        if ( index === -1) {
-            let index = this.listC.findIndex(c => c.name === model.name)
-            if ( index === -1) {
-                let prod = [...this.listC, model];
-                this.listC = prod;
-                this.sender();
-            } else {
-                alert("Name alredy registred")
-            }
-        } else {
-            alert("Id alredy registred")
-        }
+        let prod = [...this.listC, model];
+        this.listC = prod;
+        this.sender();
     }
     list(){
         return this.listC;
